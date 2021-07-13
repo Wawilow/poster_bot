@@ -2,9 +2,17 @@ import vk_api
 from datetime import datetime
 from time_convert import datatime_convert
 
+
+def all_postponed_post(VK, groupId):
+    params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
+    time_post = VK.wall.get(**params)
+    # ic(time_post)
+    return time_post['items']
+
+
 def last_post(VK, groupId):
-    params = {"owner_id": f'-{groupId}', "count": f'1'}
-    time_post = int(f"{VK.wall.get(**params)['items'][0]['date']}")
+    params = {"owner_id": f'-{groupId}', "count": f'100'}
+    time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
     time_post = datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
     time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
     time_post = datatime_convert(time_post, delta_hours=3)
@@ -12,11 +20,14 @@ def last_post(VK, groupId):
 
 
 def last_postponed_post(VK, groupId):
-    params = {"owner_id": f'-{groupId}', "count": f'1', "filter": f'postponed'}
-    time_post = int(f"{VK.wall.get(**params)['items'][0]['date']}")
-    time_post = datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
-    time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
-    time_post = datatime_convert(time_post, delta_hours=3)
+    params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
+    try:
+        time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
+        time_post = datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
+        time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
+        time_post = datatime_convert(time_post, delta_hours=3)
+    except:
+        return [False, 'no postponed post']
     return time_post
 
 
