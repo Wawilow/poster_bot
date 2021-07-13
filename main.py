@@ -1,4 +1,4 @@
-from last_post import last_post, last_postponed_post, all_postponed_post
+from last_post import last_postponed_post
 from vk_api import VkApi
 from new_post import time_to_post, new_texts_post
 from time_convert import unixtime_convert
