@@ -60,34 +60,6 @@ def unixtime_convert(date): # превращает обычную дата та�
         return 'error unitime convert'
 
 
-def datatime_convert(data, delta=0, delta_hours=0):
-    # в дату можно 1)дататам ноу 2)год, месяц, дата
-    # 3)год, месяц, дата, час, минута, секунда
-    # в дельту можно целое число, количество дней сколько при поюсовать
-    try:
-        delta = datetime.timedelta(days=delta, hours=delta_hours)
-    except:
-        return ('error delta convert')
-    try:
-        return data + delta
-    except:
-        if type(data) == type([]):
-            try:
-                if len(data) == 3:
-                    data = datetime.date(data[0], data[1], data[2])
-                    return data + delta
-                elif len(data) == 6:
-                    # data = datetime.date(data[0], data[1], data[2], data[3], data[4])
-                    data = [int(i) for i in data]
-                    data = datetime.datetime(data[0], data[1], data[2], data[3], data[4], data[5], 0)
-                    # datetime.datetime(2011, 11, 4, 0, 5, 23, 283000)
-                    # >> > datetime.fromisoformat('2011-11-04 00:05:23.283+00:00')
-                    return data + delta
-            except:
-                return ('error list ==> date convert')
-        return ('error summ data')
-
-
 def for_vk_post_convert(): #превращает нынешнюю дату в дату+1 день в формате unixtime
     return unixtime_convert(one_day_plus_time(datetime.datetime.now()))
 

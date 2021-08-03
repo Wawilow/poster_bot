@@ -1,18 +1,23 @@
-import io
-
+# vk_api
 import vk_api
-from last_post import last_postponed_post
 from vk_api import VkApi
+from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+
+# random
+from random import randrange
+
+# program file
 from new_post import time_to_post, new_texts_post
 from time_convert import unixtime_convert
-from vk_api.longpoll import VkLongPoll, VkEventType
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from random import randrange
-import requests
+from last_post import last_postponed_post
+from work_with_photo import download_message_image
+
+# ast
+# this is a analog json. I use ast because json cant work with json file
 import ast
 
 from icecream import ic
-print = ic
+# print = ic
 
 def post_make(groupId='204098688', text='\n'):
     main_token = 'ad135a8d6e65aa945e86f32aa44e9fd8f5ce4977a18a8b85a12ac9b3079c991c46699611ff17e7679bff6'
@@ -99,12 +104,9 @@ if __name__ == '__main__':
                     for atch in atchs:
                         if atch['type'] == 'photo':
                             photo = atch['photo']
-
                             url = photo['sizes'][-1]['url']
-                            print(url)
-                            img = requests.get(url).content
-                            f = io.BytesIO(img)
-                            print([i for i in f])
+                            print(download_message_image(url, 'photo_name'))
+                            # print([i for i in f])
                     print()
                     print('New message:')
 
