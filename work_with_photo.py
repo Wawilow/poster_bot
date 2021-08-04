@@ -8,13 +8,17 @@ from PIL import ImageFont
 from data_base import last_image_in_cloud, new_directory
 
 
-def download_message_image(url, photo_name, user_id='test_id'):
+def download_message_image(url, user_id='test_id'):
+    photo_name = f'{last_image_in_cloud(delta=1, user_id=user_id)}'
     photo_name = f'{photo_name}.png'
     r = urllib.request.urlopen(url)
-    new_directory('C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id)
-    with open(f"image_cloud/{user_id}/{photo_name}", "wb") as f:
-        f.write(r.read())
-    return photo_name
+    new_directory('C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', f'{user_id}')
+    try:
+        with open(f"image_cloud/{user_id}/{photo_name}", "wb") as f:
+            f.write(r.read())
+        return f'Удачно загружнео фото, в базу с именем: {photo_name}'
+    except:
+        return 'error upload image'
 
 
 def add_water_mark(input_image_path, output_image_path, text, pos):
@@ -35,6 +39,5 @@ def aa():
 
 
 if __name__ == '__main__':
-    download_message_image('https://sun9-59.userapi.com/impg/qrcMuHpWQfvxYhd3oYjkDxlCZHL5Zo_Uwl5HJw/-czMnWTP7ZE.jpg?size=510x382&quality=96&sign=520dc3a6d1b2161c80670704a684b2b6&c_uniq_tag=LgoVyxMvHb683wvGQK5q-9wN34n9JAhFDmU00QdWphg&type=album',
-                           f'{last_image_in_cloud(delta=1)}',
-                           user_id='1')
+    download_message_image('https://sun9-59.userapi.com/impg/qrcMuHpWQfvxYhd3oYjkDxlCZHL5Zo_Uwl5HJw/-czMnWTP7ZE.jpg?size=510x382&quality=96&sign=520dc3a6d1b2161c80670704a684b2b6&c_uniq_tag=LgoVyxMvHb683wvGQK5q-9wN34n9JAhFDmU00QdWphg&type=album'
+                           , user_id='1')

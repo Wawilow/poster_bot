@@ -19,15 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a185fdbd-8d3c-4989-9a66-6dcc323600d7" name="Default Changelist" comment="=">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/meme_posting.iml" afterDir="false" />
+    <list default="true" id="a185fdbd-8d3c-4989-9a66-6dcc323600d7" name="Default Changelist" comment="make a photo cloud,">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_cloud/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_cloud/photo_name (2).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_cloud/photo_name.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_cloud/water_mark.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_cloud/wind_turbine.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_cloud/1/photo_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/work_with_photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/work_with_photo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
-  <component name="RunManager" selected="Python.work_with_photo">
+  <component name="RunManager" selected="Python.main">
     <configuration name="data_base" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="meme_posting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,9 +109,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.work_with_photo" />
         <item itemvalue="Python.data_base" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -135,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628021107522</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="make a photo cloud,">
+      <created>1628087577896</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1628087577896</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,28 +155,29 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="=" />
-    <option name="LAST_COMMIT_MESSAGE" value="=" />
+    <MESSAGE value="make a photo cloud," />
+    <option name="LAST_COMMIT_MESSAGE" value="make a photo cloud," />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1628028679215">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1628090947112">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628028679215" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1628028679214">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628090947112" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1628090947112">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628028679214" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1628028679214">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628090947112" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1628090947111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628028679214" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1628028679214">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628090947111" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1628090947112">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628028679214" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1628021109500">
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628090947112" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1628087584273">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628021109500" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628087584273" />
   </component>
 </project>

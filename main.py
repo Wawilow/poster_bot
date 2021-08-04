@@ -31,9 +31,9 @@ def post_make(groupId='204098688', text='\n'):
                     )
 
 
-def write_msg(user_id, message, phhoto):
+def write_msg(user_id, message):
     if message == 'Готово':
-        write_msg_with_photo(user_id, message, phhoto)
+        write_msg_with_photo(user_id, message)
     else:
         api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
 
@@ -105,7 +105,7 @@ if __name__ == '__main__':
                         if atch['type'] == 'photo':
                             photo = atch['photo']
                             url = photo['sizes'][-1]['url']
-                            print(download_message_image(url, 'photo_name'))
+                            print(write_msg(atch['photo']['id'], download_message_image(url, user_id=atch['photo']['id'])))
                             # print([i for i in f])
                     print()
                     print('New message:')

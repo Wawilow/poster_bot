@@ -2,15 +2,15 @@ import os
 import icecream
 
 
-def last_image_in_cloud(delta=1, path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', path_append='', user_id='test_id'):
-    path += path_append
+def last_image_in_cloud(delta=1, path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id='test_id'):
     editing_files = user_photo_base(path=path, user_id=user_id)
     for i in range(len(editing_files)):
         for j in range(len(editing_files) - (i + 1)):
             if editing_files[j][1] < editing_files[j + 1][1]:
                 editing_files[j][1], editing_files[j + 1][1] = editing_files[j + 1][1], editing_files[j][1]
+    if editing_files == []:
+        return 'photo_1'
     return f'{editing_files[0][0]}_{editing_files[0][1] + delta}'
-
 
 
 def user_photo_base(path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id='test_id'):
