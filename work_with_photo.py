@@ -5,12 +5,14 @@ from bs4 import BeautifulSoup as soup
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from data_base import last_image_in_cloud, new_directory
 
 
-def download_message_image(url, photo_name):
-    photo_name = f'{photo_name}.jpg'
+def download_message_image(url, photo_name, user_id='test_id'):
+    photo_name = f'{photo_name}.png'
     r = urllib.request.urlopen(url)
-    with open(f"{photo_name}", "wb") as f:
+    new_directory('C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id)
+    with open(f"image_cloud/{user_id}/{photo_name}", "wb") as f:
         f.write(r.read())
     return photo_name
 
@@ -33,4 +35,6 @@ def aa():
 
 
 if __name__ == '__main__':
-    aa()
+    download_message_image('https://sun9-59.userapi.com/impg/qrcMuHpWQfvxYhd3oYjkDxlCZHL5Zo_Uwl5HJw/-czMnWTP7ZE.jpg?size=510x382&quality=96&sign=520dc3a6d1b2161c80670704a684b2b6&c_uniq_tag=LgoVyxMvHb683wvGQK5q-9wN34n9JAhFDmU00QdWphg&type=album',
+                           f'{last_image_in_cloud(delta=1)}',
+                           user_id='1')

@@ -1,13 +1,41 @@
 import os
-
-def get_filepaths(directory):
-    file_paths = []
-    for root, directories, files in os.walk(directory):
-        for filename in files:
-            filepath = os.path.join(root, filename)
-            file_paths.append(filepath)
-    return file_paths
+import icecream
 
 
-full_file_paths = get_filepaths("meme posting\image_cloud")
-print(full_file_paths)
+def last_image_in_cloud(delta=1, path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', path_append='', user_id='test_id'):
+    path += path_append
+    editing_files = user_photo_base(path=path, user_id=user_id)
+    for i in range(len(editing_files)):
+        for j in range(len(editing_files) - (i + 1)):
+            if editing_files[j][1] < editing_files[j + 1][1]:
+                editing_files[j][1], editing_files[j + 1][1] = editing_files[j + 1][1], editing_files[j][1]
+    return f'{editing_files[0][0]}_{editing_files[0][1] + delta}'
+
+
+
+def user_photo_base(path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id='test_id'):
+    path += f'/{user_id}'
+    list_of_files = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            list_of_files.append(os.path.join(file))
+    editing_files = []
+    for file in list_of_files:
+        file = (file).split('.')[0]
+        file = file.split('_')
+        file[1] = int(file[1])
+        editing_files.append(file)
+    return editing_files
+
+
+def new_directory(dir, path_name):
+    parent_dir = dir
+    path = os.path.join(parent_dir, path_name)
+    try:
+        os.mkdir(path)
+    except:
+        return 'Error: have same directory'
+
+
+if __name__ == '__main__':
+    icecream.ic(last_image_in_cloud())
