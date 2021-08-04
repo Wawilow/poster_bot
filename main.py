@@ -105,7 +105,8 @@ if __name__ == '__main__':
                         if atch['type'] == 'photo':
                             photo = atch['photo']
                             url = photo['sizes'][-1]['url']
-                            print(write_msg(atch['photo']['id'], download_message_image(url, user_id=atch['photo']['id'])))
+                            print(write_msg(atch['photo']['owner_id'],
+                                            download_message_image(url, user_id=atch['photo']['owner_id'])))
                             # print([i for i in f])
                     print()
                     print('New message:')
