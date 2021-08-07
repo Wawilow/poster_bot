@@ -52,22 +52,33 @@ def main():
 
 
 if __name__ == '__main__':
+    # set initial values
     main()
-    while True:
-        for event in longpoll.listen():
-            if event.type == VkBotEventType.MESSAGE_NEW:
-                atchs = event.object
-                if atchs:
-                    atchs = ast.literal_eval(str(atchs))
-                    atchs = atchs['message']['attachments']
-                    for atch in atchs:
-                        if atch['type'] == 'photo':
-                            photo = atch['photo']
-                            url = photo['sizes'][-1]['url']
-                            print(write_msg(atch['photo']['owner_id'],
-                                            download_message_image(url, user_id=atch['photo']['owner_id'])))
-                            # print(write_msg(atch['photo']['owner_id'],))
-                            print((download_image_to_post(url, photo_name='image')))
-                    print()
-                    print('New message:')
+
+    # run to the event longpool
+    for event in longpoll.listen():
+        # if event is a message
+        if event.type == VkBotEventType.MESSAGE_NEW:
+            atchs = event.object
+
+            # if we have something file in message
+            if atchs:
+                atchs = ast.literal_eval(str(atchs))
+                atchs = atchs['message']['attachments']
+                # run in the message
+                for atch in atchs:
+                    # if in message have photo
+                    if atch['type'] == 'photo':
+                        photo = atch['photo']
+                        url = photo['sizes'][-1]['url']
+                        # download photo in data base and sand result message
+                        print(write_msg(atch['photo']['owner_id'],
+                                        download_message_image(url, user_id=atch['photo']['owner_id'])))
+
+                        # download again photo in main folder with name image
+                        print((download_image_to_post(url, photo_name='image')))
+
+                        # here i need RUN function write_msg_with_photo, and postponed post
+                print()
+                print('New message:')
 

@@ -39,3 +39,4 @@ def new_directory(dir, path_name):
 
 if __name__ == '__main__':
     icecream.ic(last_image_in_cloud())
+    print()
