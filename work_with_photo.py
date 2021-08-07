@@ -21,6 +21,18 @@ def download_message_image(url, user_id='test_id'):
         return 'error upload image'
 
 
+def download_image_to_post(url, photo_name='image'):
+    photo_name = f'{photo_name}.png'
+    print(photo_name)
+    r = urllib.request.urlopen(url)
+    try:
+        with open(f"{photo_name}", "wb") as f:
+            f.write(r.read())
+        return f'{photo_name}'
+    except:
+        return 'error upload image'
+
+
 def add_water_mark(input_image_path, output_image_path, text, pos):
     photo = Image.open(input_image_path)
     drawing = ImageDraw.Draw(photo)

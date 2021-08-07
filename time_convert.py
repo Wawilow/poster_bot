@@ -12,7 +12,7 @@ def one_day_plus_time(data, delta=1):
     # в дату можно 1)дататам ноу 2)год, месяц, дата 3)год, месяц, дата, час, минута
     # в дельту можно целое число, количество дней сколько при поюсовать
     try:
-        delta = datetime.timedelta(days = delta)
+        delta = datetime.timedelta(days=delta)
     except:
         if delta == 0:
             delta = False

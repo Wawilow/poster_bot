@@ -46,6 +46,11 @@ def last_post(VK, groupId):
     return time_post
 
 
+def last_post2(VK, groupId):
+    params = {"owner_id": f'-{groupId}', "count": f'100'}
+    return VK.wall.get(**params)
+
+
 def last_postponed_post(VK, groupId):
     params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
     try:
