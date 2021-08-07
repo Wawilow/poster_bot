@@ -89,19 +89,20 @@ def time_to_post(time, small=False, fall=False):
 
 if __name__ == '__main__':
     textPost = 'тест'
-    # textPost = input()
-    # token = '54041327cd1967dc10fcce01620b625c4e6949672e5b754f10f7e7920510aabb58f3babe8febf1df4c34f'#токен основного аккаунта https://vk.com/neural_pushkin
-    token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'  # тестовое сообщество https://vk.com/algoritms_bot
-    main_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'  # личный токен моего аккаунта,
-    # можешь сделать свой, для этого перейди по ссылке https://oauth.vk.com/authorize?client_id=7594388&scope=wall,offline&redirect_uri=http://api.vk.com/blank.html&response_type=token
+    # token = '54041327cd1967dc10fcce01620b625c4e6949672e5b754f10f7e7920510aabb58f3babe8febf1df4c34f'
+    # #токен основного аккаунта https://vk.com/neural_pushkin
+    token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
+    # тестовое сообщество https://vk.com/algoritms_bot
+    main_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    # личный токен моего аккаунта,
+    # можешь сделать свой, для этого перейди по ссылке
+    # https://oauth.vk.com/authorize?client_id=7594388&scope=wall,offline&redirect_uri=http://api.vk.com/blank.html&response_type=token
     vk_api = vk_api.VkApi(token=main_token)
     VK = vk_api.get_api()
     # groupId = '204098688'  # id тестового паблика
     # groupId = '204952505'  #id основного паблика
     groupId = 204098688
     albomId = 279018273
-    f = True
-    if f:
-        print(new_image_post(VK, groupId,
-                             for_vk_post_convert(),
-                             img='image.png', albomId=albomId))
+    print(new_image_post(VK, groupId,
+                         for_vk_post_convert(),
+                         img='image.png', albomId=albomId))
