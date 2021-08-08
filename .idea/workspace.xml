@@ -19,10 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a185fdbd-8d3c-4989-9a66-6dcc323600d7" name="Default Changelist" comment="edit program">
+    <list default="true" id="a185fdbd-8d3c-4989-9a66-6dcc323600d7" name="Default Changelist" comment="add something comment&#10;after i make the program work and write unit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/last_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/last_post.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/new_post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/work_with_photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/work_with_photo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.new_post">
     <configuration name="data_base" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="meme_posting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,8 +132,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.new_post" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.work_with_photo" />
         <item itemvalue="Python.data_base" />
       </list>
@@ -193,7 +197,21 @@
       <option name="project" value="LOCAL" />
       <updated>1628339901733</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add something comment&#10;after i make the program work and write unit test">
+      <created>1628340704239</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1628340704239</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add something comment&#10;after i make the program work and write unit test">
+      <created>1628340710632</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1628340710632</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,28 +232,33 @@
     <MESSAGE value="bot successful download photo in data base&#10;бот загружает нормально фото" />
     <MESSAGE value="now he send result adding image" />
     <MESSAGE value="edit program" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit program" />
+    <MESSAGE value="add something comment&#10;after i make the program work and write unit test" />
+    <option name="LAST_COMMIT_MESSAGE" value="add something comment&#10;after i make the program work and write unit test" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1628332261589">
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1628431539872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628332261589" />
-    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1628332261589">
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628431539872" />
+    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1628431539872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628332261589" />
-    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1628332261589">
+    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628431539872" />
+    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1628431539872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628332261589" />
-    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1628332261589">
+    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628431539872" />
+    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1628431539872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628332261589" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1628339904767">
+    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628431539872" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1628340712176">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628339904767" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628340712176" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1628427151608">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628427151608" />
   </component>
 </project>

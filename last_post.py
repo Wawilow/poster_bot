@@ -46,8 +46,8 @@ def last_post(VK, groupId):
     return time_post
 
 
-def last_post2(VK, groupId):
-    params = {"owner_id": f'-{groupId}', "count": f'100'}
+def all_post(VK, groupId, how_many=100):
+    params = {"owner_id": f'-{groupId}', "count": f'{how_many}'}
     return VK.wall.get(**params)
 
 
@@ -59,7 +59,7 @@ def last_postponed_post(VK, groupId):
         time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
         time_post = data_time_convert(time_post, delta_hours=3)
     except:
-        return [False, 'no postponed post']
+        return data_time_convert(datetime.now())
     return time_post
 
 

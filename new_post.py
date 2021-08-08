@@ -1,10 +1,21 @@
+# random
+from random import randrange
+
+# vk_api
 import vk_api
 from vk_api.upload import VkUpload
+
+# time convert
 from time_convert import for_vk_post_convert
-from time_convert import one_day_plus_time, time_now
+from time_convert import one_day_plus_time, time_now, unixtime_convert
+
+#last post
+from last_post import last_postponed_post
+
+from icecream import ic
 
 
-def write_msg(user_id, message, api):
+def write_msg(user_id, api, message):
     if message == 'Готово':
         write_msg_with_photo(user_id, message)
     else:
@@ -22,15 +33,13 @@ def write_msg_with_photo(VK, api, user_id, message, Photo):
                       attachment=attachment)
 
 
-def post_make(groupId='204098688', text='\n'):
-    main_token = 'ad135a8d6e65aa945e86f32aa44e9fd8f5ce4977a18a8b85a12ac9b3079c991c46699611ff17e7679bff6'
-    vk_api = VkApi(token=main_token)
-    VK = vk_api.get_api()
-    new_texts_post(VK, groupId,
-                    '#АдекватныеМемы',
+def post_make(my_token, group_id='204098688', text='#АдекватныеМемы'):
+    Vk_api = vk_api.VkApi(token=my_token)
+    VK = Vk_api.get_api()
+    new_texts_post(VK, group_id, f'{text}',
                     data=unixtime_convert(time_to_post(
-                        time=[*str(last_postponed_post(VK, groupId)).split(' ')[0].split('-'),
-                              *str(last_postponed_post(VK, groupId)).split(' ')[1].split(':')], fall=True))
+                        time=[*str(last_postponed_post(VK, group_id)).split(' ')[0].split('-'),
+                              *str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')], fall=True))
                     )
 
 
@@ -41,6 +50,7 @@ def new_texts_post(VK, groupId, textPost, data=for_vk_post_convert()):
 
 
 def new_image_post(VK, groupId, time_to_post, img, text='', albomId=279018273):
+    print(time_to_post)
     upload = VkUpload(VK)
     photo = upload.photo(str(img), albomId)
     owner_id = photo[0]['owner_id']
@@ -102,7 +112,7 @@ if __name__ == '__main__':
     # groupId = '204098688'  # id тестового паблика
     # groupId = '204952505'  #id основного паблика
     groupId = 204098688
-    albomId = 279018273
-    print(new_image_post(VK, groupId,
-                         for_vk_post_convert(),
-                         img='image.png', albomId=albomId))
+    albumId = 279018273
+    ic(new_image_post(VK, groupId,
+                         last_postponed_post(VK, groupId),
+                         img='image.png', albomId=albumId))

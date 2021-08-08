@@ -1,7 +1,4 @@
-import bs4
 import urllib.request
-from urllib.request import urlopen
-from bs4 import BeautifulSoup as soup
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont

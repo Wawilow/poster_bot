@@ -37,6 +37,10 @@ def new_directory(dir, path_name):
         return 'Error: have same directory'
 
 
+def sql_work():
+    pass
+
+
 if __name__ == '__main__':
     icecream.ic(last_image_in_cloud())
     print()
