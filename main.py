@@ -4,15 +4,17 @@ from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
 # program file
-from new_post import write_msg
+from new_post import write_msg, new_image_post, time_to_post
 from work_with_photo import download_message_image, download_image_to_post
+from time_convert import unixtime_convert
+from last_post import last_postponed_post
 
 # ast
 # this is a analog json. I use ast because json cant work with json file
 import ast
 
 from icecream import ic
-# print = ic
+print = ic
 
 
 class Bot:
@@ -34,13 +36,15 @@ class Bot:
 
 
 def main():
-    global api, vk, longpoll, token, my_token
+    global api, VK, longpoll, token, my_token, group_id, album_id
     my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
     token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
-    vk = vk_api.VkApi(token=token)
-    longpoll = VkBotLongPoll(vk, 204098688)
-    api = vk.get_api()
+    group_id = 204098688
+    album_id = 279018273
+    VK = vk_api.VkApi(token=token)
+    longpoll = VkBotLongPoll(VK, group_id)
+    api = VK.get_api()
 
     print("Server started")
 
@@ -56,7 +60,7 @@ if __name__ == '__main__':
             atchs = event.object
             user_id = event.object['message']['from_id']
             message = event.object['message']['text']
-            print(f'Message for me by: {event.user_id}\nwith text {message}', end='')
+            print(f'Message for me by: {user_id}\nwith text {message}', end='')
 
             # if we have something file in message
             if atchs:
@@ -76,7 +80,12 @@ if __name__ == '__main__':
                         download_photo = True
                         if message == '' and user_id == 503409544:
                             # here i need RUN function write_msg_with_photo, and postponed post
-                            pass
+                            write_msg(user_id, api,
+                            (new_image_post(VK, my_token, group_id,
+                                            ((time_to_post(
+                                                str(last_postponed_post(VK, group_id)).split(' ')[0].split('-') +
+                                                str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')))),
+                                            img='image.png', albomId=album_id)))
             if not download_photo:
                 bot = Bot(user_id)
                 write_msg(user_id, api,

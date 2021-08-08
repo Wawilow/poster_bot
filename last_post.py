@@ -1,5 +1,5 @@
 import vk_api
-from datetime import datetime
+import datetime
 
 
 def data_time_convert(data, delta=0, delta_hours=0):
@@ -7,11 +7,23 @@ def data_time_convert(data, delta=0, delta_hours=0):
     # 3)год, месяц, дата, час, минута, секунда
     # в дельту можно целое число, количество дней сколько при поюсовать
     try:
-        delta = datetime.timedelta(days=delta, hours=delta_hours)
+        if delta != 0:
+            if delta_hours != 0:
+                delta = datetime.timedelta(days=delta, hours=delta_hours)
+            else:
+                delta = datetime.timedelta(days=delta)
+        else:
+            if delta_hours != 0:
+                delta = datetime.timedelta(hours=delta_hours)
+            else:
+                delta = None
     except:
         return ('error delta convert')
     try:
-        return data + delta
+        if delta != None:
+            return data + delta
+        else:
+            return data
     except:
         if type(data) == type([]):
             try:
@@ -27,6 +39,7 @@ def data_time_convert(data, delta=0, delta_hours=0):
                     return data + delta
             except:
                 return ('error list ==> date convert')
+        print(data, delta)
         return ('error summ data')
 
 
@@ -37,10 +50,19 @@ def all_postponed_post(VK, groupId):
     return time_post['items']
 
 
+def all_postponed_post_information(VK, groupId, id):
+    posts = all_postponed_post(VK, groupId)
+    post = 'Такого поста не существует'
+    for i in posts:
+        if i['id'] == id:
+            post = i
+    return post
+
+
 def last_post(VK, groupId):
     params = {"owner_id": f'-{groupId}', "count": f'100'}
     time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
-    time_post = datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
+    time_post = datetime.datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
     time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
     time_post = data_time_convert(time_post, delta_hours=3)
     return time_post
@@ -55,16 +77,16 @@ def last_postponed_post(VK, groupId):
     params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
     try:
         time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
-        time_post = datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
+        time_post = datetime.datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
         time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
         time_post = data_time_convert(time_post, delta_hours=3)
     except:
-        return data_time_convert(datetime.now())
+        return data_time_convert(datetime.datetime.now(), delta_hours=1)
     return time_post
 
 
 if __name__ == '__main__':
-    main_token = 'ad135a8d6e65aa945e86f32aa44e9fd8f5ce4977a18a8b85a12ac9b3079c991c46699611ff17e7679bff6'  # личный токен моего аккаунта,
+    main_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'  # личный токен моего аккаунта,
     # можешь сделать свой, для этого перейди по ссылке
     # https://oauth.vk.com/authorize?client_id=7594388&scope=wall,offline&redirect_uri=http://api.vk.com/blank.html&response_type=token
     vk_api = vk_api.VkApi(token=main_token)
@@ -73,4 +95,5 @@ if __name__ == '__main__':
     # groupId = '204952505'  #id основного паблика
 
     # print(last_post(VK, groupId))
-    print(last_postponed_post(VK, groupId))
+    print(all_postponed_post(VK, groupId)[0])
+    VK.w

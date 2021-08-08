@@ -39,8 +39,7 @@ def post_make(my_token, group_id='204098688', text='#АдекватныеМем�
     new_texts_post(VK, group_id, f'{text}',
                     data=unixtime_convert(time_to_post(
                         time=[*str(last_postponed_post(VK, group_id)).split(' ')[0].split('-'),
-                              *str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')], fall=True))
-                    )
+                              *str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')], fall=True)))
 
 
 def new_texts_post(VK, groupId, textPost, data=for_vk_post_convert()):
@@ -49,16 +48,18 @@ def new_texts_post(VK, groupId, textPost, data=for_vk_post_convert()):
     VK.wall.post(**params)
 
 
-def new_image_post(VK, groupId, time_to_post, img, text='', albomId=279018273):
-    print(time_to_post)
-    upload = VkUpload(VK)
+def new_image_post(VK, my_token, groupId, time_to_post, img, text='#АдекватныеМемы', albomId=279018273):
+    my_VK = vk_api.VkApi(token=my_token)
+    my_VK = my_VK.get_api()
+    upload = VkUpload(my_VK)
     photo = upload.photo(str(img), albomId)
     owner_id = photo[0]['owner_id']
     photo_id = photo[0]['id']
     attachments = f'photo{owner_id}_{photo_id}'
     params = {"owner_id": f'-{groupId}', "message": text, "publish_date": time_to_post,
               "attachments": attachments}
-    return VK.wall.post(**params)
+    print(time_to_post)
+    return f"Номер поста: {my_VK.wall.post(**params)['post_id']}\nИнформация о посте"
 
 
 def time_to_post(time, small=False, fall=False):
@@ -114,5 +115,6 @@ if __name__ == '__main__':
     groupId = 204098688
     albumId = 279018273
     ic(new_image_post(VK, groupId,
-                         last_postponed_post(VK, groupId),
+                         unixtime_convert(last_postponed_post(VK, groupId)),
                          img='image.png', albomId=albumId))
+

@@ -2,7 +2,6 @@ import time
 import datetime
 import last_post
 
-
 def time_now():
     now = datetime.datetime.now()
     return [*str(now).split(' ')[0].split('-'), *(str(now).split(' ')[1].split('.')[0]).split(':')]
