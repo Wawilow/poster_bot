@@ -13,9 +13,7 @@ from last_post import last_postponed_post
 # this is a analog json. I use ast because json cant work with json file
 import ast
 
-from icecream import ic
-print = ic
-
+from time import sleep
 
 class Bot:
     def __init__(self, user_id):
@@ -82,10 +80,11 @@ if __name__ == '__main__':
                             # here i need RUN function write_msg_with_photo, and postponed post
                             write_msg(user_id, api,
                             (new_image_post(VK, my_token, group_id,
-                                            ((time_to_post(
+                                            (unixtime_convert(time_to_post(
                                                 str(last_postponed_post(VK, group_id)).split(' ')[0].split('-') +
                                                 str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')))),
                                             img='image.png', albomId=album_id)))
+                            sleep(120)
             if not download_photo:
                 bot = Bot(user_id)
                 write_msg(user_id, api,

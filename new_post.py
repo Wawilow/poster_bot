@@ -58,11 +58,11 @@ def new_image_post(VK, my_token, groupId, time_to_post, img, text='#Адеква
     attachments = f'photo{owner_id}_{photo_id}'
     params = {"owner_id": f'-{groupId}', "message": text, "publish_date": time_to_post,
               "attachments": attachments}
-    print(time_to_post)
     return f"Номер поста: {my_VK.wall.post(**params)['post_id']}\nИнформация о посте"
 
 
 def time_to_post(time, small=False, fall=False):
+    time = [int(float(i)) for i in time]
     if time == ['[False,', "'no"]:
         time = time_now()
     if not small:
