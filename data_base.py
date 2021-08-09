@@ -38,20 +38,20 @@ def new_directory(dir, path_name):
         return 'Error: have same directory'
 
 
-def sql_work(user_id):
+def sql_work(user_id, my_token, token):
     con = sqlite3.connect("data_base.db")
     cur = con.cursor()
     all_users = []
     result = cur.execute("""SELECT * FROM users""").fetchall()
     for elem in result:
         all_users.append(elem)
-    last_kaf = [i[0] for i in all_users]
-    param = (max(last_kaf) + 1, user_id, i)
+    print(all_users)
+
+    param = (user_id, my_token, token)
     con.execute("""insert into users values (?, ?, ?)""", param)
     con.commit()
     con.close()
 
 
 if __name__ == '__main__':
-    icecream.ic(last_image_in_cloud())
-    print()
+    sql_work(1, 'AbcMy', 'AbcBot')
