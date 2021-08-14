@@ -16,10 +16,7 @@ from icecream import ic
 
 
 def write_msg(user_id, api, message):
-    if message == 'Готово':
-        write_msg_with_photo(user_id, message)
-    else:
-        api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
+    api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
 
 
 def write_msg_with_photo(VK, api, user_id, message, Photo):
@@ -49,6 +46,7 @@ def new_texts_post(VK, groupId, textPost, data=for_vk_post_convert()):
 
 
 def new_image_post(VK, my_token, groupId, time_to_post, img, text='#АдекватныеМемы', albomId=279018273):
+    print(time_to_post)
     my_VK = vk_api.VkApi(token=my_token)
     my_VK = my_VK.get_api()
     upload = VkUpload(my_VK)
@@ -63,6 +61,7 @@ def new_image_post(VK, my_token, groupId, time_to_post, img, text='#Адеква
 
 def time_to_post(time, small=False, fall=False):
     time = [int(float(i)) for i in time]
+    print(time)
     if time == ['[False,', "'no"]:
         time = time_now()
     if not small:
@@ -114,8 +113,5 @@ if __name__ == '__main__':
     # groupId = '204952505'  #id основного паблика
     groupId = 204098688
     albumId = 279018273
-    unixtime_convert()
-    ic(new_image_post(VK, groupId,
-                         unixtime_convert(last_postponed_post(VK, groupId)),
-                         img='image.png', albomId=albumId))
+    print(time_to_post([2021, 8, 9, 23, 21, 20]))
 

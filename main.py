@@ -33,41 +33,43 @@ class Bot:
     def new_message(self, user_id, message):
         if message.upper() in self._COMMANDS[0]:#начать
             return f'Зачем?'
-        elif message.upper() in self._COMMANDS[3]:#stop
+        elif message.upper() in self._COMMANDS[1]:#stop
             return f'абоба'
         else:
             return f'У меня нету этой команды, если ты хочешь узнать список команд напиши «help»'
 
 
 class Image:
-    def __init__(self, event, user_id, message, atchs, atch):
+    def __init__(self, event, user_id, message, atchs, atch, group_id, VK, my_api):
         print("\nПрислали фото")
-        self.event, self.user_id, self.message, self.atchs, self.atch = event, user_id, message, atchs, atch
+        self.event, self.user_id, self.message, self.atchs, self.atch, self.group_id, self.VK, self.my_api\
+            = event, user_id, message, atchs, atch, group_id, VK, my_api
 
 
     def image(self):
-        event, user_id, message, atchs, atch = self.event, self.user_id, self.message, self.atchs, self.atch
-
+        event, user_id, message, atchs, atch, group_id, VK, my_api =\
+            self.event, self.user_id, self.message, self.atchs, self.atch, self.group_id, self.VK, self.my_api
         photo = atch['photo']
         url = photo['sizes'][-1]['url']
         # download photo in data base and sand result message
         print(write_msg(user_id, api,
-                        download_message_image(url, user_id=user_id), ))
+                        download_message_image(url, user_id=user_id)))
         # download again photo in main folder with name image
         print((download_image_to_post(url, photo_name='image')))
         if message == '' and user_id == 503409544:
             # here i need RUN function write_msg_with_photo, and postponed post
-            self.event, self.user_id, self.message, self.atchs, self.atch = event, user_id, message, atchs, atch
-            return [user_id, api,
+            self.event, self.user_id, self.message, self.atchs, self.atch, self.group_id, self.VK, self.my_api \
+                = event, user_id, message, atchs, atch, group_id, VK, my_api
+            return [user_id, my_api,
                       (new_image_post(VK, my_token, group_id,
                                       (unixtime_convert(time_to_post(
-                                          str(last_postponed_post(VK, group_id)).split(' ')[0].split('-') +
-                                          str(last_postponed_post(VK, group_id)).split(' ')[1].split(':')))),
+                                          str(last_postponed_post(my_api, group_id)).split(' ')[0].split('-') +
+                                          str(last_postponed_post(my_api, group_id)).split(' ')[1].split(':')))),
                                       img='image.png', albomId=album_id))]
 
 
 def main():
-    global api, VK, longpoll, token, my_token, group_id, album_id
+    global my_api, api, VK, longpoll, token, my_token, group_id, album_id
     my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
     token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
@@ -76,6 +78,7 @@ def main():
     VK = vk_api.VkApi(token=token)
     longpoll = VkBotLongPoll(VK, group_id)
     api = VK.get_api()
+    my_api = (vk_api.VkApi(token=my_token)).get_api()
 
     print("Server started")
 
@@ -101,13 +104,13 @@ if __name__ == '__main__':
                 for atch in atchs:
                     # if in message have photo
                     if atch['type'] == 'photo':
-                        Image = Image(event, user_id, message, atchs, atch)
+                        Image = Image(event, user_id, message, atchs, atch, group_id, VK, my_api)
                         try:
                             write_msg(user_id, api, Image.image())
                             download_photo = True
                         except WindowsError:
                             print('somthing wrong')
-                        sleep(120)
+                        # sleep(120)
             if not download_photo:
                 bot = Bot(user_id)
                 write_msg(user_id, api,

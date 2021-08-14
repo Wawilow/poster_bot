@@ -2,21 +2,20 @@ import vk_api
 import datetime
 
 
-def data_time_convert(data, delta=0, delta_hours=0):
+def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     # в дату можно 1)дататам ноу 2)год, месяц, дата
     # 3)год, месяц, дата, час, минута, секунда
     # в дельту можно целое число, количество дней сколько при поюсовать
+    if type(data) not in [type(datetime.datetime.now()), type(datetime.date(2011, 11, 4)), type([])]:
+        return f'data type error'
+    if type(delta_days) != type(1):
+        return f'delta_days type error'
+    if type(delta_hours) != type(1):
+        return f'delta_hours type error'
+    if type(delta_minutes) != type(1):
+        return f'delta_minutes type error'
     try:
-        if delta != 0:
-            if delta_hours != 0:
-                delta = datetime.timedelta(days=delta, hours=delta_hours)
-            else:
-                delta = datetime.timedelta(days=delta)
-        else:
-            if delta_hours != 0:
-                delta = datetime.timedelta(hours=delta_hours)
-            else:
-                delta = None
+        delta = datetime.timedelta(days=delta_days, hours=delta_hours, minutes=delta_minutes)
     except:
         return ('error delta convert')
     try:
@@ -31,15 +30,13 @@ def data_time_convert(data, delta=0, delta_hours=0):
                     data = datetime.date(data[0], data[1], data[2])
                     return data + delta
                 elif len(data) == 6:
-                    # data = datetime.date(data[0], data[1], data[2], data[3], data[4])
                     data = [int(i) for i in data]
                     data = datetime.datetime(data[0], data[1], data[2], data[3], data[4], data[5], 0)
                     # datetime.datetime(2011, 11, 4, 0, 5, 23, 283000)
-                    # >> > datetime.fromisoformat('2011-11-04 00:05:23.283+00:00')
+                    # >> > datetime.from iso format('2011-11-04 00:05:23.283+00:00')
                     return data + delta
             except:
                 return ('error list ==> date convert')
-        print(data, delta)
         return ('error summ data')
 
 
@@ -75,12 +72,13 @@ def all_post(VK, groupId, how_many=100):
 
 def last_postponed_post(VK, groupId):
     params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
-    try:
+    if True:
+        print(f"time post {params}")
         time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
         time_post = datetime.datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
         time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
         time_post = data_time_convert(time_post, delta_hours=3)
-    except:
+    else:
         return data_time_convert(datetime.datetime.now(), delta_hours=1)
     return time_post
 
@@ -95,5 +93,6 @@ if __name__ == '__main__':
     # groupId = '204952505'  #id основного паблика
 
     # print(last_post(VK, groupId))
-    print(all_postponed_post(VK, groupId)[0])
-    VK.w
+    print(last_postponed_post(VK, groupId))
+    print((str(last_postponed_post(VK, groupId)).split(' ')[0].split('-') +
+           str(last_postponed_post(VK, groupId)).split(' ')[1].split(':')))
