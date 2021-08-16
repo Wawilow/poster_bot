@@ -2,10 +2,17 @@ import vk_api
 import datetime
 
 
+from icecream import ic
+
+
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
-    # в дату можно 1)дататам ноу 2)год, месяц, дата
-    # 3)год, месяц, дата, час, минута, секунда
-    # в дельту можно целое число, количество дней сколько при поюсовать
+    # variable can be
+    # 1) datatime type
+    # 2) list type [year, month, date]
+    # 3) big list [year, month, date, hour, minute, second]
+    # delta must be type int
+
+    # here i check all variable type
     if type(data) not in [type(datetime.datetime.now()), type(datetime.date(2011, 11, 4)), type([])]:
         return f'data type error'
     if type(delta_days) != type(1):
@@ -15,36 +22,36 @@ def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     if type(delta_minutes) != type(1):
         return f'delta_minutes type error'
     try:
+        # try delta in datetime delta convert
         delta = datetime.timedelta(days=delta_days, hours=delta_hours, minutes=delta_minutes)
     except:
-        return ('error delta convert')
-    try:
-        if delta != None:
+        return 'error delta convert'
+    if type(data) == type([]):
+        try:
+            if len(data) == 3:
+                data = datetime.date(data[0], data[1], data[2])
+                return data + delta
+            elif len(data) == 6:
+                data = [int(i) for i in data]
+                data = datetime.datetime(data[0], data[1], data[2], data[3], data[4], data[5], 0)
+                # datetime.datetime(2011, 11, 4, 0, 5, 23, 283000)
+                # >> > datetime.from iso format('2011-11-04 00:05:23.283+00:00')
+                return data + delta
+        except:
+            return 'error list ==> date convert'
+    if type(data) == type(datetime.datetime(2011, 11, 4, 0, 0, 0, 0)) or type(data) == type(datetime.date(2011, 11, 4)):
+        try:
             return data + delta
-        else:
-            return data
-    except:
-        if type(data) == type([]):
-            try:
-                if len(data) == 3:
-                    data = datetime.date(data[0], data[1], data[2])
-                    return data + delta
-                elif len(data) == 6:
-                    data = [int(i) for i in data]
-                    data = datetime.datetime(data[0], data[1], data[2], data[3], data[4], data[5], 0)
-                    # datetime.datetime(2011, 11, 4, 0, 5, 23, 283000)
-                    # >> > datetime.from iso format('2011-11-04 00:05:23.283+00:00')
-                    return data + delta
-            except:
-                return ('error list ==> date convert')
-        return ('error summ data')
+        except:
+            return 'error sum data and delta'
+    return 'error sum data'
 
 
 def all_postponed_post(VK, groupId):
     params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
     time_post = VK.wall.get(**params)
     # ic(time_post)
-    return time_post['items']
+    return time_post
 
 
 def all_postponed_post_information(VK, groupId, id):
@@ -90,9 +97,4 @@ if __name__ == '__main__':
     vk_api = vk_api.VkApi(token=main_token)
     VK = vk_api.get_api()
     groupId = '204098688'  # id тестового паблика
-    # groupId = '204952505'  #id основного паблика
-
-    # print(last_post(VK, groupId))
-    print(last_postponed_post(VK, groupId))
-    print((str(last_postponed_post(VK, groupId)).split(' ')[0].split('-') +
-           str(last_postponed_post(VK, groupId)).split(' ')[1].split(':')))
+    ic(all_postponed_post(VK, groupId))

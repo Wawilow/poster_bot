@@ -43,8 +43,8 @@ class Testdata_time_convert(unittest.TestCase):
         self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_days=21, delta_hours=3, delta_minutes=17),
                          datetime.datetime(2011, 11, 25, 5, 20, 43, 0),
                          'should be ok')
-    def test_wrong_type(self):
-        pass
+    def test_all_postponed_post(self):
+        self.assertEqual()
 
 
 if __name__ == '__main__':
