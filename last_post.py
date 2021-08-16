@@ -48,12 +48,14 @@ def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
 
 
 def all_postponed_post(user_api, group_id, count=100):
+    # check type all variable, if something wrong return error
     if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
         return 'user_api type error'
     if type(group_id) != type(1):
         return 'group_id type error'
     if type(count) != type(1):
         return 'count type error'
+    # make request to vk api
     try:
         params = {"owner_id": f'-{group_id}', "count": f'{count}', "filter": f'postponed'}
         time_post = user_api.wall.get(**params)

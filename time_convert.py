@@ -25,6 +25,4 @@ def next_post_time(VK, groupId):
 
 
 if __name__ == '__main__':
-    # задаем дату и время сейчас, в функцию прибавления 1 дня(можно задать дельту измения)
-    # и полученную дату закидываем в преоброзователь из обычной даты\времени в unitime
-    print(unixtime_convert(one_day_plus_time(datetime.datetime.now())))
+    pass
