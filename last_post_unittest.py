@@ -44,7 +44,14 @@ class Testdata_time_convert(unittest.TestCase):
                          datetime.datetime(2011, 11, 25, 5, 20, 43, 0),
                          'should be ok')
     def test_all_postponed_post(self):
-        self.assertEqual()
+        my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+        group_id = 204098688
+        user_VK = vk_api.VkApi(token=my_token)
+        user_api = user_VK.get_api()
+        # edit variable to run test
+        self.assertEqual(all_postponed_post(user_api, group_id, count=100),
+                         user_api.wall.get(**{"owner_id": f'-{group_id}', "count": f'{100}', "filter": f'postponed'}),
+                         'must be ok')
 
 
 if __name__ == '__main__':

@@ -47,20 +47,19 @@ def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     return 'error sum data'
 
 
-def all_postponed_post(VK, groupId):
-    params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
-    time_post = VK.wall.get(**params)
-    # ic(time_post)
-    return time_post
-
-
-def all_postponed_post_information(VK, groupId, id):
-    posts = all_postponed_post(VK, groupId)
-    post = 'Такого поста не существует'
-    for i in posts:
-        if i['id'] == id:
-            post = i
-    return post
+def all_postponed_post(user_api, group_id, count=100):
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(count) != type(1):
+        return 'count type error'
+    try:
+        params = {"owner_id": f'-{group_id}', "count": f'{count}', "filter": f'postponed'}
+        time_post = user_api.wall.get(**params)
+        return time_post
+    except:
+        return 'get wall error'
 
 
 def last_post(VK, groupId):
