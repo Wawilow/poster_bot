@@ -3,6 +3,7 @@ import datetime
 
 
 from icecream import ic
+# this function here, because in time convert we have a error
 
 
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
@@ -64,18 +65,76 @@ def all_postponed_post(user_api, group_id, count=100):
         return 'get wall error'
 
 
-def last_post(VK, groupId):
-    params = {"owner_id": f'-{groupId}', "count": f'100'}
-    time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
-    time_post = datetime.datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
-    time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
-    time_post = data_time_convert(time_post, delta_hours=3)
+def last_post(user_api, group_id):
+    # check type all variables
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
+    try:
+        # configure request
+        params = {"owner_id": f'-{group_id}', "count": f'1'}
+        # make request to vk api
+        time_post = user_api.wall.get(**params)
+    except:
+        return 'wall ger error'
     return time_post
 
 
-def all_post(VK, groupId, how_many=100):
-    params = {"owner_id": f'-{groupId}', "count": f'{how_many}'}
-    return VK.wall.get(**params)
+def last_post_date(user_api, group_id, unix_time=True):
+    # check type all variables
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(unix_time) != type(False):
+        return 'unix_time type error'
+    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
+    try:
+        # configured request
+        params = {"owner_id": f'-{group_id}', "count": f'1'}
+        # make request to vk api
+        time_post = user_api.wall.get(**params)['items'][0]['date']
+    except:
+        return 'wall ger error'
+    if unix_time:
+        return time_post
+    else:
+        try:
+            # if need not unixtime type make datatime type
+            time_post = datetime.datetime.utcfromtimestamp(time_post)
+            return time_post
+        except:
+            return 'convert time error'
+
+
+def all_post(user_api, group_id, count=100, postponed=False):
+    # check type all variable, if something wrong return error
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(count) != type(1):
+        return 'count type error'
+    if type(postponed) != type(False):
+        return 'postponed type error'
+    # if you want get postponed post
+    if postponed:
+        postponed_params = {"owner_id": f'-{group_id}', "count": f'{count}', "filter": f'postponed'}
+        try:
+            postponed_post = user_api.wall.get(**postponed_params)
+            return postponed_post
+        except:
+            return 'postponed wall get error'
+    # if you dont want get postponed post
+    else:
+        params = {"owner_id": f'-{group_id}', "count": f'{count}'}
+        try:
+            post = user_api.wall.get(**params)
+            return post
+        except:
+            return 'wall get error'
 
 
 def last_postponed_post(VK, groupId):
@@ -92,10 +151,4 @@ def last_postponed_post(VK, groupId):
 
 
 if __name__ == '__main__':
-    main_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'  # личный токен моего аккаунта,
-    # можешь сделать свой, для этого перейди по ссылке
-    # https://oauth.vk.com/authorize?client_id=7594388&scope=wall,offline&redirect_uri=http://api.vk.com/blank.html&response_type=token
-    vk_api = vk_api.VkApi(token=main_token)
-    VK = vk_api.get_api()
-    groupId = '204098688'  # id тестового паблика
-    ic(all_postponed_post(VK, groupId))
+    pass
