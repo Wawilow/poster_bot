@@ -1,5 +1,6 @@
 import os
 import icecream
+import sqlite3
 
 
 def last_image_in_cloud(delta=1, path=r'C:/Users/Admin/Desktop/проекты/meme_posting/image_cloud', user_id='test_id'):
@@ -37,10 +38,21 @@ def new_directory(dir, path_name):
         return 'Error: have same directory'
 
 
-def sql_work():
-    pass
+def sql_work(user_id, my_token, token):
+    con = sqlite3.connect("data_base.db")
+    cur = con.cursor()
+    all_users = []
+    result = cur.execute("""SELECT * FROM users""").fetchall()
+    for elem in result:
+        all_users.append(elem)
+    print(all_users)
+
+    param = (user_id, my_token, token)
+    con.execute("""insert into users values (?, ?, ?)""", param)
+    con.commit()
+    con.close()
 
 
 if __name__ == '__main__':
-    icecream.ic(last_image_in_cloud())
-    print()
+    sql_work(1, 'AbcMy', 'AbcBot')
+

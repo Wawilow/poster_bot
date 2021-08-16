@@ -7,7 +7,7 @@ from vk_api.upload import VkUpload
 
 # time convert
 from time_convert import for_vk_post_convert
-from time_convert import one_day_plus_time, time_now, unixtime_convert
+from time_convert import time_now, unixtime_convert
 
 #last post
 from last_post import last_postponed_post
@@ -16,10 +16,7 @@ from icecream import ic
 
 
 def write_msg(user_id, api, message):
-    if message == 'Готово':
-        write_msg_with_photo(user_id, message)
-    else:
-        api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
+    api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
 
 
 def write_msg_with_photo(VK, api, user_id, message, Photo):
@@ -49,6 +46,7 @@ def new_texts_post(VK, groupId, textPost, data=for_vk_post_convert()):
 
 
 def new_image_post(VK, my_token, groupId, time_to_post, img, text='#АдекватныеМемы', albomId=279018273):
+    print(time_to_post)
     my_VK = vk_api.VkApi(token=my_token)
     my_VK = my_VK.get_api()
     upload = VkUpload(my_VK)
@@ -63,6 +61,7 @@ def new_image_post(VK, my_token, groupId, time_to_post, img, text='#Адеква
 
 def time_to_post(time, small=False, fall=False):
     time = [int(float(i)) for i in time]
+    print(time)
     if time == ['[False,', "'no"]:
         time = time_now()
     if not small:
@@ -99,22 +98,15 @@ def time_to_post(time, small=False, fall=False):
 
 
 if __name__ == '__main__':
-    textPost = 'тест'
-    # token = '54041327cd1967dc10fcce01620b625c4e6949672e5b754f10f7e7920510aabb58f3babe8febf1df4c34f'
-    # #токен основного аккаунта https://vk.com/neural_pushkin
-    token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
-    # тестовое сообщество https://vk.com/algoritms_bot
-    main_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-    # личный токен моего аккаунта,
-    # можешь сделать свой, для этого перейди по ссылке
-    # https://oauth.vk.com/authorize?client_id=7594388&scope=wall,offline&redirect_uri=http://api.vk.com/blank.html&response_type=token
-    vk_api = vk_api.VkApi(token=main_token)
-    VK = vk_api.get_api()
-    # groupId = '204098688'  # id тестового паблика
-    # groupId = '204952505'  #id основного паблика
-    groupId = 204098688
-    albumId = 279018273
-    ic(new_image_post(VK, groupId,
-                         unixtime_convert(last_postponed_post(VK, groupId)),
-                         img='image.png', albomId=albumId))
+    my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
+
+    group_id = 204098688
+    album_id = 279018273
+
+    bot_VK = vk_api.VkApi(token=bot_token)
+    bot_api = bot_VK.get_api()
+
+    user_VK = vk_api.VkApi(token=my_token)
+    user_api = user_VK.get_api()
 
