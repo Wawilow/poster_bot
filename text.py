@@ -27,4 +27,4 @@ print(f"my_api: {type(user_api)}")
 print(f"bot_longpool: {type(bot_longpool)}")
 
 print()
-ic(last_postponed_post_time(user_api, group_id))
+ic(all_post(user_api, group_id))

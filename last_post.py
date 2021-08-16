@@ -137,46 +137,16 @@ def all_post(user_api, group_id, count=100, postponed=False):
             return 'wall get error'
 
 
-def last_postponed_post_time(user_api, group_id):
-    # check type all variable, if something wrong return error
-    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
-        return 'user_api type error'
-    if type(group_id) != type(1):
-        return 'group_id type error'
-
-    params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
-    try:
-        time_post = user_api.wall.get(**params)['items'][0]['date']
-    except:
-        return 'error  get time from request'
-    try:
-        time_post = (int(time_post) + (60 * 60 * 3))
-    except:
-        return 'error int time'
-    try:
-        time_post = datetime.datetime.utcfromtimestamp(time_post)
-    except:
-        return 'error datatime conversion'
-    return time_post
-
-
-def last_postponed_post(user_api, group_id):
-    # check type all variable, if something wrong return error
-    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
-        return 'user_api type error'
-    if type(group_id) != type(1):
-        return 'group_id type error'
-    # make request
-    params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
-    try:
-        # send request to vk and grab time post
-        time_post = user_api.wall.get(**params)['items'][0]['date']
-    except:
-        return 'error  get time from request'
-    try:
-        time_post = (int(time_post) + (60 * 60 * 3))
-    except:
-        return 'error int time'
+def last_postponed_post(VK, groupId):
+    params = {"owner_id": f'-{groupId}', "count": f'100', "filter": f'postponed'}
+    if True:
+        print(f"time post {params}")
+        time_post = int(f"{VK.wall.get(**params)['items'][-1]['date']}")
+        time_post = datetime.datetime.utcfromtimestamp(time_post).strftime('%Y-%m-%d %H:%M:%S')
+        time_post = [*time_post.split(' ')[0].split('-'), *time_post.split(' ')[1].split(':')]
+        time_post = data_time_convert(time_post, delta_hours=3)
+    else:
+        return data_time_convert(datetime.datetime.now(), delta_hours=1)
     return time_post
 
 

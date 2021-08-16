@@ -86,28 +86,6 @@ class Testdata_time_convert(unittest.TestCase):
         self.assertEqual(all_post(user_api, group_id, postponed=True),
                          user_api.wall.get(**{"owner_id": f'-{group_id}', "count": f'{100}', "filter": f'postponed'}),
                          'must be ok')
-    def last_postponed_post(self):
-        my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-        group_id = 204098688
-        user_VK = vk_api.VkApi(token=my_token)
-        user_api = user_VK.get_api()
-        # edit variable to run test
-        self.assertEqual(
-            last_postponed_post(user_api, group_id),
-            datetime.datetime.utcfromtimestamp((int(user_api.wall.get(**{"owner_id": f'-{group_id}', "count": f'1',
-                                                                         "filter": f'postponed'})['items'][0]['date'])
-                                                + (60 * 60 * 3))), 'must be ok')
-    def test_last_postponed_post_time(self):
-        my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-        group_id = 204098688
-        user_VK = vk_api.VkApi(token=my_token)
-        user_api = user_VK.get_api()
-        # edit variable to run test
-        self.assertEqual(
-            last_postponed_post(user_api, group_id),
-            int(user_api.wall.get(**{"owner_id": f'-{group_id}', "count": f'1',
-                                     "filter": f'postponed'})['items'][0]['date']) + (60 * 60 * 3),
-            'must be ok')
 
 
 if __name__ == '__main__':
