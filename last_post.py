@@ -2,6 +2,7 @@ import vk_api
 import datetime
 
 
+# convert time
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     # variable can be
     # 1) data time type
@@ -44,68 +45,8 @@ def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     return 'error sum data'
 
 
-def all_postponed_post(user_api, group_id, count=100):
-    # check type all variable, if something wrong return error
-    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
-        return 'user_api type error'
-    if type(group_id) != type(1):
-        return 'group_id type error'
-    if type(count) != type(1):
-        return 'count type error'
-    # make request to vk api
-    try:
-        params = {"owner_id": f'-{group_id}', "count": f'{count}', "filter": f'postponed'}
-        time_post = user_api.wall.get(**params)
-        return time_post
-    except:
-        return 'get wall error'
-
-
-def last_post(user_api, group_id):
-    # check type all variables
-    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
-        return 'user_api type error'
-    if type(group_id) != type(1):
-        return 'group_id type error'
-    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
-    try:
-        # configure request
-        params = {"owner_id": f'-{group_id}', "count": f'1'}
-        # make request to vk api
-        time_post = user_api.wall.get(**params)
-    except:
-        return 'wall ger error'
-    return time_post
-
-
-def last_post_date(user_api, group_id, unix_time=True):
-    # check type all variables
-    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
-        return 'user_api type error'
-    if type(group_id) != type(1):
-        return 'group_id type error'
-    if type(unix_time) != type(False):
-        return 'unix_time type error'
-    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
-    try:
-        # configured request
-        params = {"owner_id": f'-{group_id}', "count": f'1'}
-        # make request to vk api
-        time_post = user_api.wall.get(**params)['items'][0]['date']
-    except:
-        return 'wall ger error'
-    if unix_time:
-        return time_post
-    else:
-        try:
-            # if need not unixtime type make datatime type
-            time_post = datetime.datetime.utcfromtimestamp(time_post)
-            return time_post
-        except:
-            return 'convert time error'
-
-
-def all_post(user_api, group_id, count=100, postponed=False):
+# return all posts
+def all_posts(user_api, group_id, count=100, postponed=False):
     # check type all variable, if something wrong return error
     if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
         return 'user_api type error'
@@ -133,6 +74,89 @@ def all_post(user_api, group_id, count=100, postponed=False):
             return 'wall get error'
 
 
+# return all published post
+def all_post(user_api, group_id, count=100):
+    # check type all variable, if something wrong return error
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(count) != type(1):
+        return 'count type error'
+    # make request to vk api
+    try:
+        params = {"owner_id": f'-{group_id}', "count": f'{count}'}
+        time_post = user_api.wall.get(**params)
+        return time_post
+    except:
+        return 'get wall error'
+
+
+# return last published post
+def last_post(user_api, group_id):
+    # check type all variables
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
+    try:
+        # configure request
+        params = {"owner_id": f'-{group_id}', "count": f'1'}
+        # make request to vk api
+        time_post = user_api.wall.get(**params)
+    except:
+        return 'wall ger error'
+    return time_post
+
+
+# return date last published post
+def last_post_date(user_api, group_id, unix_time=True):
+    # check type all variables
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(unix_time) != type(False):
+        return 'unix_time type error'
+    # maybe here need check its bot api or user api, but it dosent meter and very hard to do
+    try:
+        # configured request
+        params = {"owner_id": f'-{group_id}', "count": f'1'}
+        # make request to vk api
+        time_post = user_api.wall.get(**params)['items'][0]['date']
+    except:
+        return 'wall ger error'
+    if unix_time:
+        return time_post
+    else:
+        try:
+            # if need not unixtime type make datatime type
+            time_post = datetime.datetime.utcfromtimestamp(time_post)
+            return time_post
+        except:
+            return 'convert time error'
+
+
+# return all postponed post
+def all_postponed_post(user_api, group_id, count=100):
+    # check type all variable, if something wrong return error
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    if type(count) != type(1):
+        return 'count type error'
+    # make request to vk api
+    try:
+        params = {"owner_id": f'-{group_id}', "count": f'{count}', "filter": f'postponed'}
+        time_post = user_api.wall.get(**params)
+        return time_post
+    except:
+        return 'get wall error'
+
+
+# return last postponed post
 def last_postponed_post(user_api, group_id):
     # check type all variable, if something wrong return error
     if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
@@ -146,6 +170,30 @@ def last_postponed_post(user_api, group_id):
         return time_post
     except:
         return 'get wall error'
+
+
+# return date last postponed post
+def last_postponed_post_date(user_api, group_id, unix_time=False):
+    # check type all variable, if something wrong return error
+    if str(type(user_api)) != "<class 'vk_api.vk_api.VkApiMethod'>":
+        return 'user_api type error'
+    if type(group_id) != type(1):
+        return 'group_id type error'
+    # make request to vk api
+    try:
+        params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
+        time_post = user_api.wall.get(**params)['items'][0]['date']
+    except:
+        return 'wall ger error'
+    if unix_time:
+        return time_post
+    else:
+        try:
+            # if need not unixtime type make datatime type
+            time_post = datetime.datetime.utcfromtimestamp(time_post)
+            return time_post
+        except:
+            return 'convert time error'
 
 
 if __name__ == '__main__':

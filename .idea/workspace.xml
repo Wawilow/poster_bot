@@ -13,8 +13,6 @@
     <list default="true" id="6395e658-45a5-4dfa-a9c0-72540b0160fa" name="Default Changelist" comment="lul">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/last_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/last_post.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/time_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/time_convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/time_convert_unittest.py" beforeDir="false" afterPath="$PROJECT_DIR$/time_convert_unittest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +221,21 @@
       <option name="project" value="LOCAL" />
       <updated>1628436785965</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="lul">
+      <created>1629845422729</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1629845422729</updated>
+    </task>
+    <task id="LOCAL-00013" summary="lul">
+      <created>1629845628849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1629845628849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,13 +258,14 @@
     <MESSAGE value="edit program" />
     <MESSAGE value="add something comment&#10;after i make the program work and write unit test" />
     <MESSAGE value="final steps" />
-    <option name="LAST_COMMIT_MESSAGE" value="final steps" />
+    <MESSAGE value="lul" />
+    <option name="LAST_COMMIT_MESSAGE" value="lul" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="821" y="432" key="Github.Dialog.Accounts.Choose" timestamp="1629844632541">
+    <state x="821" y="432" key="Github.Dialog.Accounts.Choose" timestamp="1629845635404">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="821" y="432" key="Github.Dialog.Accounts.Choose/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1629844632541" />
+    <state x="821" y="432" key="Github.Dialog.Accounts.Choose/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1629845635404" />
     <state width="1463" height="282" key="GridCell.Tab.0.bottom" timestamp="1629845416120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -269,10 +282,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1463" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1629845416120" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1629844640639">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1629845632391">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1629844640639" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1629845632391" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1628427151608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
