@@ -2,10 +2,6 @@ import vk_api
 import datetime
 
 
-from icecream import ic
-# this function here, because in time convert we have a error
-
-
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     # variable can be
     # 1) datatime type

@@ -1,27 +1,43 @@
 import unittest
 from time_convert import *
-import vk_api
-from vk_api.bot_longpoll import VkBotLongPoll
 
 
-class Test_unixtime_convert(unittest.TestCase):
-    def test_next_post_time(self):
-        self.assertEqual()
+class Testdata_last_post_unittest(unittest.TestCase):
+    def test_date_delta(self):
+        # if send small date
+        self.assertEqual(data_time_convert([2011, 11, 4]),
+                         datetime.date(2011, 11, 4),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4], delta_days=3),
+                         datetime.date(2011, 11, 7),
+                         'should be ok')
+        # if send big date
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43]),
+                         datetime.datetime(2011, 11, 4, 2, 3, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_days=2),
+                         datetime.datetime(2011, 11, 6, 2, 3, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_hours=3),
+                         datetime.datetime(2011, 11, 4, 5, 3, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_minutes=4),
+                         datetime.datetime(2011, 11, 4, 2, 7, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_days=1, delta_hours=8),
+                         datetime.datetime(2011, 11, 5, 10, 3, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_hours=8, delta_minutes=5),
+                         datetime.datetime(2011, 11, 4, 10, 8, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_days=1, delta_minutes=15),
+                         datetime.datetime(2011, 11, 5, 2, 18, 43, 0),
+                         'should be ok')
+        self.assertEqual(data_time_convert([2011, 11, 4, 2, 3, 43], delta_days=21, delta_hours=3, delta_minutes=17),
+                         datetime.datetime(2011, 11, 25, 5, 20, 43, 0),
+                         'should be ok')
 
 
 if __name__ == '__main__':
-    global my_api, api, VK, longpoll, token, my_token, group_id, album_id
-    my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-    token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
-
-    group_id = 204098688
-    album_id = 279018273
-    VK = vk_api.VkApi(token=token)
-    longpoll = VkBotLongPoll(VK, group_id)
-    api = VK.get_api()
-    my_api = (vk_api.VkApi(token=my_token)).get_api()
-
-    print("Server started")
-    print(type(VK))
-    print(type(group_id))
-    print(next_post_time(my_api, group_id))
+    # vk api need time to sleep, and need run each test simple
+    unittest.main()
