@@ -4,7 +4,7 @@ import datetime
 
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
     # variable can be
-    # 1) datatime type
+    # 1) data time type
     # 2) list type [year, month, date]
     # 3) big list [year, month, date, hour, minute, second]
     # delta must be type int
@@ -143,9 +143,9 @@ def last_postponed_post(user_api, group_id):
     try:
         params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
         time_post = user_api.wall.get(**params)
+        return time_post
     except:
         return 'get wall error'
-    return time_post
 
 
 if __name__ == '__main__':
