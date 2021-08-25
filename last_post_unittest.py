@@ -143,7 +143,6 @@ class test_last_post(unittest.TestCase):
                          'must be ok')
 
 
-
 if __name__ == '__main__':
     # vk api need time to sleep, and need run each test simple
     unittest.main()
