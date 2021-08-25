@@ -182,9 +182,13 @@ def last_postponed_post_date(user_api, group_id, unix_time=False):
     # make request to vk api
     try:
         params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
-        time_post = user_api.wall.get(**params)['items'][0]['date']
+        time_post = user_api.wall.get(**params)
     except:
         return 'wall ger error'
+    try:
+        time_post = time_post['items'][0]['date']
+    except:
+        return 'no postponed post'
     if unix_time:
         return time_post
     else:
