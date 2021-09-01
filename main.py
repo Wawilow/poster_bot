@@ -63,8 +63,14 @@ class Image:
 
 
 def main():
-    global user_token, bot_token, group_id, album_id
-    global bot_VK, bot_api, user_VK, user_api
+    global user_token, bot_token
+
+    global group_id, album_id
+
+    global bot_VK, bot_api
+
+    global user_VK, user_api
+
     global bot_longpool
 
     user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
@@ -82,6 +88,7 @@ def main():
     bot_longpool = VkBotLongPoll(bot_VK, group_id)
 
     print("Server started")
+    print(f"{type(bot_VK)}")
 
 
 if __name__ == '__main__':

@@ -12,23 +12,6 @@ from time_convert import time_now, unixtime_convert
 #last post
 from last_post import last_postponed_post
 
-from icecream import ic
-
-
-def write_msg(user_id, api, message):
-    api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999))
-
-
-def write_msg_with_photo(VK, api, user_id, message, Photo):
-    upload = vk_api.VkUpload(VK)
-    photo = upload.photo_messages(str(Photo))
-    owner_id = photo[0]['owner_id']
-    photo_id = photo[0]['id']
-    access_key = photo[0]['access_key']
-    attachment = f'photo{owner_id}_{photo_id}_{access_key}'
-    api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999),
-                      attachment=attachment)
-
 
 def post_make(my_token, group_id='204098688', text='#АдекватныеМемы'):
     Vk_api = vk_api.VkApi(token=my_token)
