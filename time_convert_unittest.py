@@ -1,27 +1,29 @@
 import unittest
 from time_convert import *
-import vk_api
-from vk_api.bot_longpoll import VkBotLongPoll
 
 
-class Test_unixtime_convert(unittest.TestCase):
-    def test_next_post_time(self):
-        self.assertEqual()
+class test_time_convert(unittest.TestCase):
+    def test_time_now(self):
+        self.assertEqual(time_now(),
+                         [*str(datetime.datetime.now()).split(' ')[0].split('-'),
+                          *(str(datetime.datetime.now()).split(' ')[1].split('.')[0]).split(':')],
+                         'should be ok')
+
+
+    def test_unix_time_convert(self):
+        self.assertEqual(unix_time_convert(datetime.datetime(2011, 2, 15, 4, 45, 13)), 1297734313.0, 'should be ok')
+        self.assertEqual(unix_time_convert(datetime.date(2011, 2, 15)), 1297717200.0, 'should be ok')
+
+
+    def test_data_time_list_convert(self):
+        self.assertEqual(
+            data_time_list_convert(datetime.datetime(2101, 11, 23, 10, 17, 23)), [2101, 11, 23, 10, 17, 23],
+            'should be ok')
+        self.assertEqual(
+            data_time_list_convert(datetime.date(2101, 11, 23)), [2101, 11, 23, 0, 0, 0],
+            'should be ok')
 
 
 if __name__ == '__main__':
-    global my_api, api, VK, longpoll, token, my_token, group_id, album_id
-    my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-    token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
-
-    group_id = 204098688
-    album_id = 279018273
-    VK = vk_api.VkApi(token=token)
-    longpoll = VkBotLongPoll(VK, group_id)
-    api = VK.get_api()
-    my_api = (vk_api.VkApi(token=my_token)).get_api()
-
-    print("Server started")
-    print(type(VK))
-    print(type(group_id))
-    print(next_post_time(my_api, group_id))
+    # vk api need time to sleep, and need run each test simple
+    unittest.main()
