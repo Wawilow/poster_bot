@@ -35,13 +35,21 @@ def write_msg_with_photo(bot_VK, bot_api, user_id, message, photo):
             int(user_id)
         except:
             return f'user id type error'
-    # messagr
+    # message
     if type(message) != type('1'):
         try:
             str(message)
         except:
             return f'message type error'
-    photo = vk_api.VkUpload(bot_VK).photo_messages(str(photo))
-    attachment = f'photo{photo[0]["owner_id"]}_{photo[0]["id"]}_{photo[0]["access_key"]}'
-    bot_api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999),
-                      attachment=attachment)
+    try:
+        photo = vk_api.VkUpload(bot_VK).photo_messages(str(photo))
+    except:
+        return 'upload photo error'
+    try:
+        attachment = f'photo{photo[0]["owner_id"]}_{photo[0]["id"]}_{photo[0]["access_key"]}'
+    except:
+        return 'configure request error'
+    try:
+        return bot_api.messages.send(user_id=user_id, message=str(message), random_id=randrange(999999999), attachment=attachment)
+    except:
+        return 'request error'
