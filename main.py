@@ -11,6 +11,15 @@ from time import sleep
 import ast
 
 
+# my file
+from bot_work import *
+from data_base import *
+from last_post import *
+from new_post import *
+from time_convert import *
+from work_with_photo import *
+
+
 from icecream import ic
 # print = ic
 
@@ -93,3 +102,36 @@ def main():
 if __name__ == '__main__':
     # set initial values
     main()
+    # run to the event long pool
+    for event in bot_longpool.listen():
+        # if event is a message
+        if event.type == VkBotEventType.MESSAGE_NEW:
+            download_photo = False
+            atchs = event.object
+            user_id = event.object['message']['from_id']
+            message = event.object['message']['text']
+            print(f'Message for me by: {user_id}\nwith text {message}', end='')
+
+            # if we have something file in message
+            if atchs:
+                atchs = ast.literal_eval(str(atchs))
+                atchs = atchs['message']['attachments']
+                # run in the message
+                for atch in atchs:
+                    # if in message have photo
+                    if atch['type'] == 'photo':
+                        photo = atch['photo']
+                        url = photo['sizes'][-1]['url']
+                        # download photo in data base and sand result message
+                        print(write_msg(user_id, bot_api, download_message_image(url, user_id=user_id)))
+                        # download again photo in main folder with name image
+                        print((download_image_to_post(url, photo_name='image')))
+                        download_photo = True
+                        if message == '' and user_id == 503409544:
+                            # here i need RUN function write_msg_with_photo, and postponed post
+                            write_msg(user_id, bot_api, (new_image_post(user_VK, user_api, group_id, album_id, unix_time_convert(my_group_time(user_api, group_id)), "#Адекватные Мемы", 'image.png')))
+                            sleep(120)
+            if not download_photo:
+                bot = Bot(user_id)
+                write_msg(user_id, bot_api,
+                          bot.new_message(user_id, message))

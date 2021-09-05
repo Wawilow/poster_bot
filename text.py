@@ -35,4 +35,4 @@ user_api = user_VK.get_api()
 
 bot_longpool = VkBotLongPoll(bot_VK, group_id)
 
-print(datetime.datetime.utcfromtimestamp(1631293860))
+print(datetime.datetime.utcfromtimestamp(1630890660.0))

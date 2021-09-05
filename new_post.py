@@ -47,7 +47,7 @@ def new_texts_post(user_api, group_id, text, date):
         return 'wall post error'
 
 
-def new_image_post(user_VK, groupId, albomId, time, text, img):
+def new_image_post(user_VK, user_api, groupId, albomId, time, text, img):
     try:
         upload = VkUpload(user_VK)
         photo = upload.photo(str(img), albomId)
@@ -61,8 +61,9 @@ def new_image_post(user_VK, groupId, albomId, time, text, img):
         return 'get attachments error'
     try:
         params = {"owner_id": f'-{groupId}', "message": text, "publish_date": time, "attachments": attachments}
-        return user_VK.wall.post(**params)['post_id']
+        return user_api.wall.post(**params)['post_id']
     except:
+        print(params)
         return 'wall post error'
 
 

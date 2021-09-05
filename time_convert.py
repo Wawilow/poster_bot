@@ -15,7 +15,7 @@ def unix_time_convert(date):  # превращает обычную дата т�
         return f'date type error'
     try:
         unix_time = time.mktime(date.timetuple())
-        return unix_time
+        return int(unix_time)
     except:
         return 'error unix time convert'
 
