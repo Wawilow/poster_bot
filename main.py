@@ -88,7 +88,6 @@ def main():
     bot_longpool = VkBotLongPoll(bot_VK, group_id)
 
     print("Server started")
-    print(f"{type(bot_VK)}")
 
 
 if __name__ == '__main__':

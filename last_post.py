@@ -1,6 +1,7 @@
 import vk_api
 import datetime
 
+from icecream import ic
 
 # convert time
 def data_time_convert(data, delta_days=0, delta_hours=0, delta_minutes=0):
@@ -122,9 +123,9 @@ def last_post_date(user_api, group_id, unix_time=True):
     # maybe here need check its bot api or user api, but it dosent meter and very hard to do
     try:
         # configured request
-        params = {"owner_id": f'-{group_id}', "count": f'1'}
+        params = {"owner_id": f'-{group_id}', "count": f'100'}
         # make request to vk api
-        time_post = user_api.wall.get(**params)['items'][0]['date']
+        time_post = user_api.wall.get(**params)['items'][-1]['date']
     except:
         return 'wall ger error'
     if unix_time:
@@ -181,12 +182,13 @@ def last_postponed_post_date(user_api, group_id, unix_time=False):
         return 'group_id type error'
     # make request to vk api
     try:
-        params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
+        params = {"owner_id": f'-{group_id}', "count": f'100', "filter": f'postponed'}
         time_post = user_api.wall.get(**params)
+        print(time_post)
     except:
         return 'wall ger error'
     try:
-        time_post = time_post['items'][0]['date']
+        time_post = time_post['items'][-1]['date']
     except:
         return 'no postponed post'
     if unix_time:
@@ -201,4 +203,17 @@ def last_postponed_post_date(user_api, group_id, unix_time=False):
 
 
 if __name__ == '__main__':
-    pass
+    my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
+
+    group_id = 204098688
+    album_id = 279018273
+
+    bot_VK = vk_api.VkApi(token=bot_token)
+    bot_api = bot_VK.get_api()
+
+    user_VK = vk_api.VkApi(token=my_token)
+    user_api = user_VK.get_api()
+
+    print((last_postponed_post_date(user_api, group_id)))
+    # last_p = data_time_convert(last_postponed_post_date(user_api, group_id), delta_hours=3)
