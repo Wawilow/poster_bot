@@ -85,7 +85,9 @@ def main():
     user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
     bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
-    group_id = 204098688
+    # group_id = 204098688
+    bot_group_id = 204098688
+    group_id = 198242788
     album_id = 279018273
 
     bot_VK = vk_api.VkApi(token=bot_token)
@@ -94,7 +96,7 @@ def main():
     user_VK = vk_api.VkApi(token=user_token)
     user_api = user_VK.get_api()
 
-    bot_longpool = VkBotLongPoll(bot_VK, group_id)
+    bot_longpool = VkBotLongPoll(bot_VK, bot_group_id)
 
     print("Server started")
 
@@ -127,11 +129,11 @@ if __name__ == '__main__':
                         # download again photo in main folder with name image
                         print((download_image_to_post(url, photo_name='image')))
                         download_photo = True
-                        if message == '' and user_id == 503409544:
+                        if message == '' and user_id in [503409544, 239248195]:
                             # here i need RUN function write_msg_with_photo, and postponed post
-                            write_msg(user_id, bot_api, (new_image_post(user_VK, user_api, group_id, album_id, unix_time_convert(my_group_time(user_api, group_id)), "#Адекватные Мемы", 'image.png')))
-                            sleep(120)
+                            write_msg(user_id, bot_api, (new_image_post(user_VK, user_api, group_id, album_id, unix_time_convert(my_group_time(user_api, group_id)), "#АдекватныеМемы", 'image.png')))
+                            sleep(15)
             if not download_photo:
                 bot = Bot(user_id)
                 write_msg(user_id, bot_api,
-                          bot.new_message(user_id, message))
+                          bot.new_message(user_id, message)) м  
