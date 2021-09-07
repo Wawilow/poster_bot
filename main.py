@@ -3,6 +3,9 @@ import vk_api
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
+# tg
+from vk_api.longpoll import VkLongPoll, VkEventType
+
 # time.sleep
 from time import sleep
 
@@ -19,6 +22,9 @@ from new_post import *
 from time_convert import *
 from work_with_photo import *
 
+
+# multi task
+import multitasking
 
 from icecream import ic
 # print = ic
@@ -101,9 +107,7 @@ def main():
     print("Server started")
 
 
-if __name__ == '__main__':
-    # set initial values
-    main()
+def vk_bot():
     # run to the event long pool
     for event in bot_longpool.listen():
         # if event is a message
@@ -136,4 +140,48 @@ if __name__ == '__main__':
             if not download_photo:
                 bot = Bot(user_id)
                 write_msg(user_id, bot_api,
-                          bot.new_message(user_id, message)) м  
+                          bot.new_message(user_id, message))
+
+
+def telegram_bot():
+    token = 'f626cee422e9d40baf72cdb457b391a82fe1ba7a8cb5968be52f4094504a2ddedc4df00cf098ad5bdb454'
+    vk = vk_api.VkApi(token=token)
+    api = vk.get_api()
+    longpoll = VkLongPoll(vk)
+    for event in longpoll.listen():
+        if event.type == VkEventType.MESSAGE_NEW:
+            if event.to_me:
+                print('message')
+
+multitasking.set_max_threads(2)
+@multitasking.task
+def multi_task_vk(teleg_or_vk):
+    if teleg_or_vk:
+        try:
+            print("тут работает вк бот")
+            vk_bot()
+        except:
+            print('вк упал')
+    else:
+        print('тут работает телеграмм бот')
+
+
+multitasking.set_max_threads(2)
+@multitasking.task
+def multi_task_telegram():
+    try:
+        print('тут работает телега')
+        telegram_bot()
+    except:
+        return 'телега упала'
+
+
+if __name__ == '__main__':
+    # set initial values
+    main()
+    # run to the event long pool vk
+    multi_task_vk(True)
+    # run to the event long pool telegram
+    multi_task_telegram()
+
+
