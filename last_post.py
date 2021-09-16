@@ -1,5 +1,6 @@
 import vk_api
 import datetime
+import time
 
 from icecream import ic
 
@@ -166,9 +167,11 @@ def last_postponed_post(user_api, group_id):
         return 'group_id type error'
     # make request to vk api
     try:
-        params = {"owner_id": f'-{group_id}', "count": f'1', "filter": f'postponed'}
+        params = {"owner_id": f'-{group_id}', "count": f'100', "filter": f'postponed'}
         time_post = user_api.wall.get(**params)
-        return time_post
+        if time_post['count'] == 0:
+            return datetime.datetime.now()
+        return time_post['items'][-1]
     except:
         return 'get wall error'
 
@@ -184,7 +187,12 @@ def last_postponed_post_date(user_api, group_id, unix_time=False):
     try:
         params = {"owner_id": f'-{group_id}', "count": f'100', "filter": f'postponed'}
         time_post = user_api.wall.get(**params)
-        print(time_post)
+        if time_post['count'] == 0:
+            time_post = datetime.datetime.now()
+            if not unix_time:
+                return time_post
+            else:
+                return time.mktime(time_post.timetuple())
     except:
         return 'wall ger error'
     try:
@@ -215,5 +223,4 @@ if __name__ == '__main__':
     user_VK = vk_api.VkApi(token=my_token)
     user_api = user_VK.get_api()
 
-    print((last_postponed_post_date(user_api, group_id)))
     # last_p = data_time_convert(last_postponed_post_date(user_api, group_id), delta_hours=3)

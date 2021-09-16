@@ -12,17 +12,6 @@ from time_convert import *
 from last_post import *
 
 
-def my_group_time(user_api, group_id):
-    last_p = data_time_convert(last_postponed_post_date(user_api, group_id), delta_hours=3)
-    timetopost = time_to_post([last_p.hour, last_p.minute], [[4, 11], [7, 11], [10, 4], [14, 13], [16, 42], [18, 34], [20, 11], [22, 17]])
-    if timetopost[0] == True:
-        last_p = data_time_convert(last_p, delta_days=1)
-        time = datetime.datetime(last_p.year, last_p.month, last_p.day, timetopost[1][0], timetopost[1][1], 0)
-    else:
-        time = datetime.datetime(last_p.year, last_p.month, last_p.day, timetopost[1][0], timetopost[1][1], 0)
-    return time
-
-
 def post_make(my_token, group_id='204098688', text='#АдекватныеМемы'):
     Vk_api = vk_api.VkApi(token=my_token)
     VK = Vk_api.get_api()
@@ -63,13 +52,11 @@ def new_image_post(user_VK, user_api, groupId, albomId, time, text, img):
         params = {"owner_id": f'-{groupId}', "message": text, "publish_date": time, "attachments": attachments}
         return user_api.wall.post(**params)['post_id']
     except:
-        print(params)
         return 'wall post error'
 
 
 def dumerandwojack_time_to_post(time, small=False, fall=False):
     time = [int(float(i)) for i in time]
-    print(time)
     if time == ['[False,', "'no"]:
         time = []
         # time_now()

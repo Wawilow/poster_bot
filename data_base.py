@@ -45,7 +45,6 @@ def sql_work(user_id, my_token, token):
     result = cur.execute("""SELECT * FROM users""").fetchall()
     for elem in result:
         all_users.append(elem)
-    print(all_users)
 
     param = (user_id, my_token, token)
     con.execute("""insert into users values (?, ?, ?)""", param)
