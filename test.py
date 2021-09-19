@@ -1,4 +1,4 @@
-telegram_bot_token = ""
+telegram_bot_token = "1998961866:AAHLsq-XgXfpgUsS3b1lAZjwgSZI8EreRMA"
 
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
