@@ -33,12 +33,12 @@ from icecream import ic
 # multitasking for telegram and vk bot
 multitasking.set_max_threads(2)
 @multitasking.task
-def multi_task_vk(teleg_or_vk):
-    if teleg_or_vk:
+def multi_task_vk():
+    try:
         print("тут работает вк бот")
         vk_bot()
-    else:
-        print('тут работает телеграмм бот')
+    except:
+        print('вк упал')
 
 
 multitasking.set_max_threads(2)
@@ -146,41 +146,8 @@ class Bot:
         download_photo = True
         if self.message == '' and self.user_id in [503409544, 239248195]:
             # here i need RUN function write_msg_with_photo, and postponed post
-            write_msg(self.user_id, bot_api, (new_image_post(user_VK, user_api, group_id, album_id,
-                                                        unix_time_convert(my_group_time(user_api, group_id)),
-                                                        "#АдекватныеМемы", 'image.png')))
+            write_msg(self.user_id, bot_api, (new_image_post(user_token, user_api, group_id, unix_time_convert(my_group_time(user_api, group_id)), "#АдекватныеМемы", 'image.png')))
             # sleep(15)
-
-
-# set my variables, after hee all be get from sql table
-def main():
-    global user_token, bot_token
-
-    global group_id, album_id
-
-    global bot_VK, bot_api
-
-    global user_VK, user_api
-
-    global bot_longpool
-
-    user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
-    bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
-
-    # group_id = 204098688
-    bot_group_id = 204098688
-    group_id = 198242788
-    album_id = 279018273
-
-    bot_VK = vk_api.VkApi(token=bot_token)
-    bot_api = bot_VK.get_api()
-
-    user_VK = vk_api.VkApi(token=user_token)
-    user_api = user_VK.get_api()
-
-    bot_longpool = VkBotLongPoll(bot_VK, bot_group_id)
-
-    print("Server started")
 
 
 def my_group_time(user_api, group_id):
@@ -236,11 +203,42 @@ def telegram_bot():
                 print('message')
 
 
+# set my variables, after hee all be get from sql table
+def main():
+    global user_token, bot_token
+
+    global group_id, album_id
+
+    global bot_VK, bot_api
+
+    global user_VK, user_api
+
+    global bot_longpool
+
+    user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
+
+    # group_id = 204098688
+    bot_group_id = 204098688
+    group_id = 198242788
+    album_id = 279018273
+
+    bot_VK = vk_api.VkApi(token=bot_token)
+    bot_api = bot_VK.get_api()
+
+    user_VK = vk_api.VkApi(token=user_token)
+    user_api = user_VK.get_api()
+
+    bot_longpool = VkBotLongPoll(bot_VK, bot_group_id)
+
+    print("Server started")
+
+
 if __name__ == '__main__':
     # set initial values
     main()
     # run to the event long pool vk
-    multi_task_vk(True)
+    multi_task_vk()
     # run to the event long pool telegram
     multi_task_telegram()
 

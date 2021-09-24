@@ -1,15 +1,21 @@
 # random
 from random import randrange
 
+import requests
+
 # vk_api
 import vk_api
 from vk_api.upload import VkUpload
+import vk
 
 # time convert
 from time_convert import *
 
 #last post
 from last_post import *
+
+import vk
+import requests
 
 
 def post_make(my_token, group_id='204098688', text='#АдекватныеМемы'):
@@ -36,20 +42,31 @@ def new_texts_post(user_api, group_id, text, date):
         return 'wall post error'
 
 
-def new_image_post(user_VK, user_api, groupId, albomId, time, text, img):
+def new_image_post(user_token, user_api, group_id, time, text, img):
     try:
-        upload = VkUpload(user_VK)
-        photo = upload.photo(str(img), albomId)
+        file = {'file1': open(f'{img}', 'rb')}
+
+        user_session_api = vk.API(vk.Session(access_token=user_token))
+        upload = user_session_api.photos.getWallUploadServer(group_id=group_id, v=5.131)
+        upload = requests.post(upload['upload_url'], files=file).json()
+
+        photo = (user_session_api.photos.saveWallPhoto(
+            group_id=group_id,
+            photo=upload['photo'],
+            server=upload['server'],
+            hash=upload['hash'],
+            v=5.131))
     except:
         return 'upload error'
     try:
         owner_id = photo[0]['owner_id']
         photo_id = photo[0]['id']
-        attachments = f'photo{owner_id}_{photo_id}'
+        access_key = photo[0]['access_key']
+        attachments = f"""photo{owner_id}_{photo_id}&access_key={access_key}"""
     except:
         return 'get attachments error'
     try:
-        params = {"owner_id": f'-{groupId}', "message": text, "publish_date": time, "attachments": attachments}
+        params = {"owner_id": f'-{group_id}', "message": text, "publish_date": time, "attachments": attachments}
         return user_api.wall.post(**params)['post_id']
     except:
         return 'wall post error'
@@ -163,21 +180,36 @@ def time_to_post(time, table):
             return [False, table[i + 1]]
 
 
+def my_group_time(user_api, group_id):
+    last_p = data_time_convert(last_postponed_post_date(user_api, group_id), delta_hours=3)
+    timetopost = time_to_post([last_p.hour, last_p.minute], [[4, 11], [7, 11], [10, 4], [14, 13], [16, 42], [18, 34], [20, 11], [22, 17]])
+    if timetopost[0] == True:
+        last_p = data_time_convert(last_p, delta_days=1)
+        time = datetime.datetime(last_p.year, last_p.month, last_p.day, timetopost[1][0], timetopost[1][1], 0)
+    else:
+        time = datetime.datetime(last_p.year, last_p.month, last_p.day, timetopost[1][0], timetopost[1][1], 0)
+    return time
+
 
 if __name__ == '__main__':
-    my_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
     bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
     group_id = 204098688
-    album_id = 279018273
+    bot_group_id = 204098688
+    # group_id = 198242788
+    # album_id = 279018273
+    album_id = 278942929
 
     bot_VK = vk_api.VkApi(token=bot_token)
     bot_api = bot_VK.get_api()
 
-    user_VK = vk_api.VkApi(token=my_token)
+    user_VK = vk_api.VkApi(token=user_token)
     user_api = user_VK.get_api()
 
-    time = my_group_time(user_api, group_id)
-    post = new_texts_post(user_api, group_id, 'test',
-                          date=unix_time_convert(time))
+    img = 'image.png'
 
+    time = unix_time_convert(my_group_time(user_api, group_id))
+    print(time)
+
+    print(new_image_post(user_token, user_api, group_id, time, '', 'image.png'))
