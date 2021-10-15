@@ -28,9 +28,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a185fdbd-8d3c-4989-9a66-6dcc323600d7" name="Default Changelist" comment="edit posting, and begin write code for tg bot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632496316706</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="edit posting, and begin write code for tg bot">
+      <created>1634295457055</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1634295457055</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -398,10 +402,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="262" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1634294601010" />
-    <state x="821" y="432" key="Github.Dialog.Accounts.Choose" timestamp="1632496329436">
+    <state x="821" y="432" key="Github.Dialog.Accounts.Choose" timestamp="1634295711003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="821" y="432" key="Github.Dialog.Accounts.Choose/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1632496329436" />
+    <state x="821" y="432" key="Github.Dialog.Accounts.Choose/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1634295711003" />
     <state x="2741" y="432" key="Github.Dialog.Accounts.Choose/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1632074429762" />
     <state width="1899" height="240" key="GridCell.Tab.0.bottom" timestamp="1634284571048">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -427,11 +431,11 @@
     <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628437596344" />
     <state width="1899" height="240" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1634284571048" />
     <state width="1899" height="277" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1632316093982" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1632496319738">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1634295707997">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1628436787230" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1632496319738" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1634295707997" />
     <state x="2472" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1632074426806" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1632331264148">
       <screen x="0" y="0" width="1920" height="1040" />
