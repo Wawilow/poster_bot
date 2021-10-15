@@ -34,20 +34,24 @@ from icecream import ic
 multitasking.set_max_threads(2)
 @multitasking.task
 def multi_task_vk():
+    global reset
     try:
         print("тут работает вк бот")
         vk_bot()
     except:
+        reset = True
         print('вк упал')
 
 
 multitasking.set_max_threads(2)
 @multitasking.task
 def multi_task_telegram():
+    global reset
     try:
         print('тут работает телега')
         telegram_bot()
     except:
+        reset = True
         return 'телега упала'
 
 
@@ -235,10 +239,14 @@ def main():
 
 
 if __name__ == '__main__':
-    # set initial values
-    main()
-    # run to the event long pool vk
-    multi_task_vk()
-    # run to the event long pool telegram
-    multi_task_telegram()
+    reset = True
+    while True:
+        if reset:
+            reset = False
+            # set initial values
+            main()
+            # run to the event long pool vk
+            multi_task_vk()
+            # run to the event long pool telegram
+            multi_task_telegram()
 

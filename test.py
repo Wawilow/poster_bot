@@ -5,8 +5,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -33,7 +32,6 @@ def error(update, context):
 def main():
     print("""Start the bot.""")
     updater = Updater(f"{telegram_bot_token}", use_context=True)
-    # Get the dispatcher to register handlers
     dp = updater.dispatcher
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
