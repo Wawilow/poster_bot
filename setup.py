@@ -219,7 +219,8 @@ def main():
 
     global bot_longpool
 
-    user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    # get token in size https://vkhost.github.io/
+    user_token = '5f6513d39e735063c82791903e5c599e282e7db1b0816c1ba96c42a3c892290f2e42e279e31aab4340e63'
     bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
     # group_id = 204098688
@@ -235,6 +236,7 @@ def main():
 
     bot_longpool = VkBotLongPoll(bot_VK, bot_group_id)
 
+    print()
     print("Server started")
 
 

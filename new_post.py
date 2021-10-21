@@ -192,7 +192,8 @@ def my_group_time(user_api, group_id):
 
 
 if __name__ == '__main__':
-    user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
+    user_token = '76e9445d2039e9afde8fc845c4a1b02a155350bdd903a56b21d013bb6c99b5215b7e111c6a68fa0f5d84e'
+    # user_token = '7590a1ae275d8b38b843371b2d9c4b64b196df60e43284e50e246f984c22b0f2c3cfe21a159f450d286a2'
     bot_token = 'cb0400ae1b14d0875b4803640297401794c9d0984e0585a5521672c3f9aa60e88c856f5ce2248b640ef60'
 
     group_id = 204098688
@@ -208,6 +209,7 @@ if __name__ == '__main__':
     user_api = user_VK.get_api()
 
     img = 'image.png'
+    print(last_postponed_post_date(user_api, group_id))
 
     time = unix_time_convert(my_group_time(user_api, group_id))
     print(time)
