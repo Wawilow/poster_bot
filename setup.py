@@ -29,6 +29,10 @@ from work_with_photo import *
 
 from icecream import ic
 # print = ic
+from icecream import ic
+from datetime import datetime as dt
+ic.configureOutput(includeContext=True)
+ic.configureOutput(prefix=lambda : f'{dt.now().strftime("%M:%S:%f")}: ')
 
 # multitasking for telegram and vk bot
 multitasking.set_max_threads(2)
@@ -150,7 +154,7 @@ class Bot:
         download_photo = True
         if self.message == '' and self.user_id in [503409544, 239248195]:
             # here i need RUN function write_msg_with_photo, and postponed post
-            write_msg(self.user_id, bot_api, (new_image_post(user_token, user_api, group_id, unix_time_convert(my_group_time(user_api, group_id)), "#АдекватныеМемы", 'image.png')))
+            write_msg(self.user_id, bot_api, (new_image_post(user_token, user_api, group_id, unix_time_convert(my_group_time(user_api, group_id)), " ", 'image.png')))
             # sleep(15)
 
 
@@ -197,14 +201,7 @@ def vk_bot():
 
 
 def telegram_bot():
-    token = 'f626cee422e9d40baf72cdb457b391a82fe1ba7a8cb5968be52f4094504a2ddedc4df00cf098ad5bdb454'
-    vk = vk_api.VkApi(token=token)
-    api = vk.get_api()
-    longpoll = VkLongPoll(vk)
-    for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW:
-            if event.to_me:
-                print('message')
+    pass
 
 
 # set my variables, after hee all be get from sql table
@@ -241,14 +238,20 @@ def main():
 
 
 if __name__ == '__main__':
-    reset = True
-    while True:
-        if reset:
-            reset = False
-            # set initial values
-            main()
-            # run to the event long pool vk
-            multi_task_vk()
-            # run to the event long pool telegram
-            multi_task_telegram()
-
+    try:
+        reset = True
+        while True:
+            if reset:
+                reset = False
+                # set initial values
+                main()
+                # run to the event long pool vk
+                multi_task_vk()
+                # run to the event long pool telegram
+                multi_task_telegram()
+    except ConnectionError as e:
+        print('Ошибка соединения: ', e)
+    except Exception as r:
+        print("Непридвиденная ошибка: ", r)
+    finally:
+        print("Здесь всё закончилось")

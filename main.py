@@ -1,6 +1,3 @@
-# vk_api
-import vk_api
-from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
 # tg
@@ -239,14 +236,21 @@ def main():
 
 
 if __name__ == '__main__':
-    reset = True
-    while True:
-        if reset:
-            reset = False
-            # set initial values
-            main()
-            # run to the event long pool vk
-            multi_task_vk()
-            # run to the event long pool telegram
-            multi_task_telegram()
+    try:
+        reset = True
+        while True:
+            if reset:
+                reset = False
+                # set initial values
+                main()
+                # run to the event long pool vk
+                multi_task_vk()
+                # run to the event long pool telegram
+                multi_task_telegram()
+    except ConnectionError as e:
+        print('Ошибка соединения: ', e)
+    except Exception as r:
+        print("Непридвиденная ошибка: ", r)
+    finally:
+        print("Здесь всё закончилось")
 
